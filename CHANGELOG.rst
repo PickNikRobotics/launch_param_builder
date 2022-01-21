@@ -2,7 +2,7 @@
 Changelog for package launch_param_builder
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2022-01-21)
+------------------
 * First commit
 * Contributors: Jafar Abdi
