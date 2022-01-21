@@ -1,7 +1,7 @@
 from setuptools import setup
 from glob import glob
 
-package_name = "parameter_builder"
+package_name = "launch_param_builder"
 
 setup(
     name=package_name,
@@ -11,7 +11,7 @@ setup(
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         (
             "share/" + package_name + "/launch",
-            ["example/parameter_builder_example.launch.py"],
+            ["example/launch_param_builder_example.launch.py"],
         ),
         ("share/" + package_name + "/config", glob("example/config/*")),
         ("share/" + package_name, ["package.xml"]),
