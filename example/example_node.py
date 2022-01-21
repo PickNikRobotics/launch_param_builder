@@ -38,7 +38,7 @@ from rcl_interfaces.msg import ParameterDescriptor
 
 class ParameterBuilderExample(Node):
     def __init__(self):
-        super().__init__("parameter_builder_example")
+        super().__init__("launch_param_builder_example")
 
         self.declare_parameter(
             "my_parameter",

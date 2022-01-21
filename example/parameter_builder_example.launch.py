@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-from parameter_builder import ParameterBuilder
+from launch_param_builder import ParameterBuilder
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
@@ -37,10 +37,10 @@ def generate_launch_description():
     return LaunchDescription(
         [
             Node(
-                package="parameter_builder",
+                package="launch_param_builder",
                 executable="example_node.py",
                 parameters=[
-                    ParameterBuilder("parameter_builder")
+                    ParameterBuilder("launch_param_builder")
                     .parameter("my_parameter", 20.0)
                     .file_parameter(
                         "parameter_file", "config/parameter_file"
