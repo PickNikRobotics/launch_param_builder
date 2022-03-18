@@ -71,5 +71,12 @@ class ParameterBuilder(object):
         self._parameters[parameter_name] = parameter_value
         return self
 
+    def path_parameter(self, parameter_name: str, file_path: str):
+        self._parameters[parameter_name] = str(self._package_path / file_path)
+        return self
+
+    def path_parameter_raw(self, file_path: str):
+        return str(self._package_path / file_path)
+
     def to_dict(self):
         return self._parameters
