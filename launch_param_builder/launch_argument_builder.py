@@ -27,6 +27,16 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-from .utils import *
-from .launch_param_builder import *
-from .launch_argument_builder import *
+from pathlib import Path
+
+from ament_index_python.packages import get_package_share_directory
+
+
+class ArgumentBuilder(object):
+    _package_path = None
+
+    def __init__(self, package_name: str):
+        self._package_path = Path(get_package_share_directory(package_name))
+
+    def get_path(self, file_path: str):
+        return str(self._package_path / file_path)
