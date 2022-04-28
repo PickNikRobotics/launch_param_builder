@@ -40,6 +40,7 @@ class ParameterBuilder(object):
 
     def __init__(self, package_name: str):
         self._package_path = Path(get_package_share_directory(package_name))
+        self._parameters = {}
 
     def yaml(self, file_path: str, parameter_namespace: str = None):
         if parameter_namespace:
