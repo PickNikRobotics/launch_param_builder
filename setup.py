@@ -11,7 +11,10 @@ setup(
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
         (
             "share/" + package_name + "/launch",
-            ["example/launch_param_builder_example.launch.py"],
+            [
+                "example/launch_param_builder_example.launch.py",
+                "example/parameter_injection_example.launch.py",
+            ],
         ),
         ("share/" + package_name + "/config", glob("example/config/*")),
         ("share/" + package_name, ["package.xml"]),
