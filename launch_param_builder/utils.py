@@ -33,6 +33,7 @@ from typing import List, Union
 import xacro
 from ament_index_python.packages import get_package_share_directory
 
+
 class ParameterBuilderFileNotFoundError(KeyError):
     pass
 
@@ -80,6 +81,7 @@ def load_xacro(file_path: Path, mappings: dict = None):
 
     file = xacro.process_file(file_path, mappings=mappings)
     return file.toxml()
+
 
 def get_path(package_name: str, file_path: str):
     return str(Path(get_package_share_directory(package_name)) / file_path)
