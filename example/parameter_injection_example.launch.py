@@ -13,7 +13,9 @@ from launch_param_builder.utils import get_path
 def launch_setup(context, *args, **kwargs):
 
     # Initialize Arguments
-    injection_params_package = LaunchConfiguration("injection_params_package").perform(context)
+    injection_params_package = LaunchConfiguration("injection_params_package").perform(
+        context
+    )
 
     base_params = (
         ParameterBuilder(injection_params_package)
@@ -24,10 +26,12 @@ def launch_setup(context, *args, **kwargs):
     print("Base Params File Content: ")
     print(base_params)
 
-    print(
-        "File path to inject: " +
-        base_params["param_file_to_inject"])
-    params_to_inject = ParameterBuilder(injection_params_package).yaml(base_params["param_file_to_inject"]).to_dict()
+    print("File path to inject: " + base_params["param_file_to_inject"])
+    params_to_inject = (
+        ParameterBuilder(injection_params_package)
+        .yaml(base_params["param_file_to_inject"])
+        .to_dict()
+    )
     print("Params to inject: ")
     print(params_to_inject)
 
@@ -48,4 +52,6 @@ def generate_launch_description():
         ),
     ]
 
-    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
+    return LaunchDescription(
+        declared_arguments + [OpaqueFunction(function=launch_setup)]
+    )
