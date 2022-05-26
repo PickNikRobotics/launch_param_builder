@@ -5,7 +5,7 @@ package_name = "launch_param_builder"
 
 setup(
     name=package_name,
-    version="0.1.0",
+    version="0.1.1",
     packages=[package_name],
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
