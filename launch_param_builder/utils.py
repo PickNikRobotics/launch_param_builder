@@ -54,7 +54,7 @@ ParameterValueType = Union[
 
 
 def construct_angle_radians(loader, node):
-    """Utility function to construct radian values from yaml."""
+    """Utility function to construct radian values from YAML."""
     value = loader.construct_scalar(node)
     try:
         return float(value)
