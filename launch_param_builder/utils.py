@@ -63,7 +63,7 @@ def construct_angle_radians(loader, node):
 
 
 def construct_angle_degrees(loader, node):
-    """Utility function for converting degrees into radians from yaml."""
+    """Utility function for converting degrees into radians from YAML."""
     return math.radians(construct_angle_radians(loader, node))
 
 
