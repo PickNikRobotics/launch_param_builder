@@ -85,14 +85,7 @@ class ParameterBuilderExample(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
     node = ParameterBuilderExample()
-
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-
     node.destroy_node()
     rclpy.shutdown()
 
