@@ -29,9 +29,11 @@
 
 import yaml
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Optional
 import xacro
 from ament_index_python.packages import get_package_share_directory
+import jinja2
+import math
 
 
 class ParameterBuilderFileNotFoundError(KeyError):
@@ -52,31 +54,46 @@ ParameterValueType = Union[
 ]
 
 
+def render_template(template: Path, mappings: dict):
+    with template.open("r") as file:
+        jinja2_template = jinja2.Template(file.read())
+        jinja2_template.globals["radians"] = math.radians
+        jinja2_template.globals["degrees"] = math.degrees
+    return jinja2_template.render(mappings)
+
+
 def raise_if_file_not_found(file_path: Path):
     if not file_path.exists():
         raise ParameterBuilderFileNotFoundError(f"File {file_path} doesn't exist")
 
 
-def load_file(file_path: Path):
+def load_file(file_path: Path, mappings: Optional[dict] = None):
     raise_if_file_not_found(file_path)
+    if mappings is not None:
+        return render_template(file_path, mappings)
     try:
         with open(file_path, "r") as file:
             return file.read()
-    except EnvironmentError:  # parent of IOError, OSError *and* WindowsError where available
+    except (
+        EnvironmentError
+    ):  # parent of IOError, OSError *and* WindowsError where available
         return None
 
 
-def load_yaml(file_path: Path):
+def load_yaml(file_path: Path, mappings: Optional[dict] = None):
     raise_if_file_not_found(file_path)
 
     try:
-        with open(file_path, "r") as file:
-            return yaml.load(file, Loader=yaml.FullLoader)
-    except EnvironmentError:  # parent of IOError, OSError *and* WindowsError where available
+        return yaml.load(
+            render_template(file_path, mappings or {}), Loader=yaml.FullLoader
+        )
+    except (
+        EnvironmentError
+    ):  # parent of IOError, OSError *and* WindowsError where available
         return None
 
 
-def load_xacro(file_path: Path, mappings: dict = None):
+def load_xacro(file_path: Path, mappings: Optional[dict] = None):
     raise_if_file_not_found(file_path)
 
     file = xacro.process_file(file_path, mappings=mappings)

@@ -1,0 +1,8 @@
+{{ namespace }}:
+  names:
+    {% for robot in robots %}
+      {{ robot.name }}: "{{ robot.ip }}"
+    {% endfor %}
+radians: {{ radians(120) }}
+degrees: {{ degrees(1.0) }}
+names: {{ names }}

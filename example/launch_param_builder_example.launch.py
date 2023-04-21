@@ -46,6 +46,17 @@ def generate_launch_description():
                         "parameter_file", "config/parameter_file"
                     )  # Or /absolute/path/to/file
                     .yaml(
+                        file_path="config/parameters_template.yaml",
+                        mappings={
+                            "namespace": "env_0",
+                            "robots": [
+                                {"name": "ur", "ip": "127.0.0.1"},
+                                {"name": "panda", "ip": "127.0.0.2"},
+                            ],
+                            "names": ["name1", "name2", "name3"],
+                        },
+                    )
+                    .yaml(
                         file_path="config/parameters.yaml"
                     )  # Or /absolute/path/to/file
                     .xacro_parameter(

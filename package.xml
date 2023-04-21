@@ -11,9 +11,10 @@
   <test_depend>python3-pytest</test_depend>
 
   <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>python3-jinja2</exec_depend>
   <exec_depend>python3-yaml</exec_depend>
-  <exec_depend>xacro</exec_depend>
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>xacro</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>
