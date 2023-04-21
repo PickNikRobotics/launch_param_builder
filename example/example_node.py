@@ -64,7 +64,28 @@ class ParameterBuilderExample(Node):
             "my_robot",
             descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING),
         )
+        self.declare_parameter(
+            "env_0.names.ur",
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING),
+        )
+        self.declare_parameter(
+            "env_0.names.panda",
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING),
+        )
+        self.declare_parameter(
+            "radians",
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_DOUBLE),
+        )
+        self.declare_parameter(
+            "degrees",
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_DOUBLE),
+        )
+        self.declare_parameter(
+            "names",
+            descriptor=ParameterDescriptor(type=ParameterType.PARAMETER_STRING_ARRAY),
+        )
 
+        self.get_logger().info(f"Parameters: {self.get_parameters_by_prefix('')}")
         self.get_logger().info(
             f"my_parameter: {self.get_parameter('my_parameter').value}"
         )
@@ -81,6 +102,13 @@ class ParameterBuilderExample(Node):
         self.get_logger().info(
             f"package_name: {self.get_parameter('package_name').value}"
         )
+        self.get_logger().info(f"ur ip: {self.get_parameter('env_0.names.ur').value}")
+        self.get_logger().info(
+            f"panda ip: {self.get_parameter('env_0.names.panda').value}"
+        )
+        self.get_logger().info(f"degrees: {self.get_parameter('degrees').value}")
+        self.get_logger().info(f"radians: {self.get_parameter('radians').value}")
+        self.get_logger().info(f"names: {self.get_parameter('names').value}")
 
 
 def main(args=None):

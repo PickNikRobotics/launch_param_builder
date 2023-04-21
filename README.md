@@ -13,6 +13,12 @@ colcon test --packages-select launch_param_builder --event-handlers console_dire
 colcon test-result
 ```
 
+To run pre-commit, use the following command.
+
+```bash
+pre-commit run --all-files
+```
+
 To add a copyright for a new file
 
 ```bash

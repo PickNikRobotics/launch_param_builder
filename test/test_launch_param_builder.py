@@ -28,6 +28,7 @@
 
 
 from launch_param_builder import ParameterBuilder
+import math
 
 
 def test_builder():
@@ -35,9 +36,26 @@ def test_builder():
         ParameterBuilder("launch_param_builder")
         .parameter("my_parameter", 20.0)
         .file_parameter(
-            "parameter_file", "config/parameter_file"
+            "parameter_file",
+            "config/parameter_file",
         )  # Or /absolute/path/to/file
+        .file_parameter(
+            "parameter_file_template",
+            "config/parameter_file_template",
+            mappings={"test_name": "testing"},
+        )
         .yaml(file_path="config/parameters.yaml")  # Or /absolute/path/to/file
+        .yaml(
+            file_path="config/parameters_template.yaml",
+            mappings={
+                "namespace": "env_0",
+                "robots": [
+                    {"name": "ur", "ip": "127.0.0.1"},
+                    {"name": "panda", "ip": "127.0.0.2"},
+                ],
+                "names": ["name1", "name2", "name3"],
+            },
+        )
         .xacro_parameter(
             parameter_name="my_robot",
             file_path="config/parameter.xacro",  # Or /absolute/path/to/file
@@ -52,3 +70,16 @@ def test_builder():
     assert parameters["the_answer_to_life"] == 42
     assert parameters["package_name"] == "launch_param_builder"
     assert parameters.get("my_robot") is not None, "Parameter xacro not loaded"
+    assert (
+        parameters["parameter_file_template"]
+        == "This's a template parameter file testing"
+    )
+    assert math.isclose(parameters["radians"], 2.0943951, rel_tol=1e-6)
+    assert math.isclose(parameters["degrees"], 57.2958, rel_tol=1e-6)
+    assert (
+        parameters.get("env_0").get("names") is not None
+    ), "Parameter yaml file not loaded"
+    names = parameters["env_0"]["names"]
+    assert names["ur"] == "127.0.0.1"
+    assert names["panda"] == "127.0.0.2"
+    assert len(parameters["names"]) == 3
