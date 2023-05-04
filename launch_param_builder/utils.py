@@ -28,6 +28,7 @@
 
 
 import yaml
+from tempfile import NamedTemporaryFile
 from pathlib import Path
 from typing import List, Union, Optional
 import xacro
@@ -65,6 +66,15 @@ def render_template(template: Path, mappings: dict):
 def raise_if_file_not_found(file_path: Path):
     if not file_path.exists():
         raise ParameterBuilderFileNotFoundError(f"File {file_path} doesn't exist")
+
+
+def create_file_from_template(file: Path, mappings: Optional[dict] = None):
+    with NamedTemporaryFile(
+        mode="w", prefix="launch_param_builder_", delete=False
+    ) as parsed_file:
+        parsed_file_path = parsed_file.name
+        parsed_file.write(render_template(file, mappings or {}))
+        return parsed_file_path
 
 
 def load_file(file_path: Path, mappings: Optional[dict] = None):
