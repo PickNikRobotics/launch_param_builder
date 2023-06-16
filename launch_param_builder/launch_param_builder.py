@@ -39,10 +39,22 @@ class ParameterBuilder(object):
     _parameters = {}
 
     def __init__(self, package_name: str):
+        """
+        @param package_name: Using this value, the path to the package's 'share'
+            directory will be set to 'self._package_path'.
+        """
         self._package_path = Path(get_package_share_directory(package_name))
         self._parameters = {}
 
     def yaml(self, file_path: str, parameter_namespace: str = None):
+        """
+        @param file_path: Path of the yaml file UNDER the top level directory
+            of 'package_name' that is passed to the 'ParameterBuilder's
+            constructor.
+            E.g. If the yaml file is at %TOPDIR_PKG%/conf/foo.yaml,
+                pass file_path = "conf/foo.yaml"
+        @return The instance itself.
+        """
         if parameter_namespace:
             if parameter_namespace in self._parameters:
                 self._parameters[parameter_namespace].update(
@@ -69,6 +81,10 @@ class ParameterBuilder(object):
         return self
 
     def parameter(self, parameter_name: str, parameter_value: ParameterValueType):
+        """
+        @summary: Set 'parameter_name' = 'parameter_value'.
+        @return The instance itself.
+        """
         self._parameters[parameter_name] = parameter_value
         return self
 
