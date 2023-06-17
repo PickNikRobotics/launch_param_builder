@@ -69,6 +69,9 @@ class ParameterBuilder(object):
         return self
 
     def file_parameter(self, parameter_name: str, file_path: str):
+        """
+        @deprecated: Use 'yaml' method instead.
+        """
         self._parameters[parameter_name] = load_file(self._package_path / file_path)
         return self
 
