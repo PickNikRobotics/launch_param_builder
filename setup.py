@@ -23,7 +23,11 @@ setup(
     maintainer_email="jafar@picknik.ai",
     description="Python library for loading parameters in launch files",
     license="BSD",
-    tests_require=["pytest"],
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         "console_scripts": [],
     },
