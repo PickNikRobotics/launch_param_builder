@@ -24,8 +24,8 @@ setup(
     description="Python library for loading parameters in launch files",
     license="BSD",
     extras_require={
-        'test': [
-            'pytest',
+        "test": [
+            "pytest",
         ],
     },
     entry_points={
