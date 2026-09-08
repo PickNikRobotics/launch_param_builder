@@ -19,7 +19,7 @@ jobs:
             ROS_REPO: main
           - ROS_DISTRO: humble
             ROS_REPO: testing
-          - ROS_DISTRO: rolling
+          - ROS_DISTRO: lyrical
             ROS_REPO: main
           - ROS_DISTRO: rolling
             ROS_REPO: testing
