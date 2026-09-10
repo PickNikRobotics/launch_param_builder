@@ -5,7 +5,7 @@
   <version>0.1.1</version>
   <description>Python library for loading parameters in launch files</description>
   <maintainer email="jafar@picknik.ai">Jafar Abdi</maintainer>
-  <license>BSD</license>
+  <license>BSD-3-Clause</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>python3-pytest</test_depend>
